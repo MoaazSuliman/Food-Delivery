@@ -1,0 +1,78 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --main-color : #fb5849;
+}
+body{
+     min-height: 100vh;
+     background: #fff;
+     font-family: 'Poppins', sans-serif;
+}
+.container
+{
+    background: url(/images/istockphoto-516329534-612x612.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+image-rendering: auto;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+.formcontainer{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+background-color: white;
+min-height: 400px;
+width: 300px;
+border-radius: 15px;
+padding: 20px;
+padding-bottom: 30px;
+text-align: start;
+text-transform: capitalize;
+}
+.formcontainer h2{
+    margin: 20px 0;
+    text-align: center;
+    text-transform: capitalize;
+    color: var(--main-color);
+}
+
+.formcontainer .lab{
+    margin-bottom: 20px;
+   
+}
+.lab input{
+    padding:10px  20px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+.btn{
+    width: 100%;
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+form a{
+    color: var(--main-color);
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+}
+form p{
+    margin-bottom: 10px;
+}
+input::placeholder{
+    text-transform: capitalize;
+}
