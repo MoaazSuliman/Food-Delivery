@@ -12,10 +12,13 @@ public class LoginService {
 
     public int login(String email, String password) {
         Person person = personRepository.findByEmailAndPassword(email, password).orElse(null);
+        // There Are No Admin Or User In Our DB.
         if (person == null)
             return -1;
+        // This Email And Password For Admin In Our DB.
         else if (person.getRole().equals("ADMIN"))
             return 1;
+        // At The End This Email And Password Are For User In our DB.
         return 2;
 
     }

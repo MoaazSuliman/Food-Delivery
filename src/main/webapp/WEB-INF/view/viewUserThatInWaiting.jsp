@@ -81,7 +81,7 @@
                 <td class="text-truncate" style="max-width: 150px">
                   <br />
                   <br />
-                  <a href="#" class="btn btn-danger">Delete All Orders</a>
+                  <a href="deleteAllOrdersForUser/${user.id}" class="btn btn-danger">Delete All Orders</a>
                 </td>
               </tr>
             </c:forEach>

@@ -70,7 +70,7 @@
               <td>Image</td>
               <td>Category</td>
               <td>Action</td>
-              <td>Action</td>
+              <!-- <td>Action</td> -->
             </tr>
           </thead>
           <tbody class="text-dark product-details">
@@ -93,9 +93,8 @@
                 <td class="text-truncate" style="max-width: 150px">
                   <br />
                   <br />
-                  <a href="deleteFood/${food.id}" class="btn btn-danger"
-                    >Delete</a
-                  >
+                  <!-- <a href="deleteFood/${food.id}" class="btn btn-danger"
+                    >Delete</a> -->
                 </td>
               </tr>
             </c:forEach>

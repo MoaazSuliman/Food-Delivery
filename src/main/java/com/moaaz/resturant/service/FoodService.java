@@ -13,12 +13,12 @@ public class FoodService {
     private FoodRepository foodRepository;
 
     public void addFood(Food food) {
-        food.setTotal(getTotal(food));
+        food.setTotal(getTotalPriceForFoodAfterDiscount(food));
         foodRepository.save(food);
     }
 
     public void updateFood(Food food) {
-        food.setTotal(getTotal(food));
+        food.setTotal(getTotalPriceForFoodAfterDiscount(food));
         foodRepository.save(food);
     }
 
@@ -34,7 +34,7 @@ public class FoodService {
         foodRepository.deleteById(id);
     }
 
-    private double getTotal(Food food) {
+    private double getTotalPriceForFoodAfterDiscount(Food food) {
         return food.getPrice() - (food.getPrice() * (food.getDiscount() / 100));
 
     }

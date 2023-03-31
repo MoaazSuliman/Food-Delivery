@@ -17,7 +17,7 @@
 
   <body>
     <div class="row">
-        <!-- Start RightBar -->
+      <!-- Start RightBar -->
       <div class="right-bar col-lg-3 col-md-4 col-sm-4 sticky-top">
         <h3>Admin DashBoard</h3>
         <ul>
@@ -65,7 +65,7 @@
               <td>Name</td>
               <td>Detail</td>
               <td>Action</td>
-              <td>Action</td>
+              <!-- <td>Action</td> -->
             </tr>
           </thead>
           <tbody class="text-dark product-details">
@@ -82,9 +82,9 @@
                 <td class="text-truncate" style="max-width: 150px">
                   <br />
                   <br />
-                  <a href="deleteCategory/${category.id}" class="btn btn-danger"
+                  <!-- <a href="deleteCategory/${category.id}" class="btn btn-danger"
                     >Delete</a
-                  >
+                  > -->
                 </td>
               </tr>
             </c:forEach>

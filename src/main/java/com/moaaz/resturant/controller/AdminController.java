@@ -18,7 +18,6 @@ import java.io.IOException;
 
 
 @Controller
-
 public class AdminController {
     @Autowired
     private FoodService foodService;
@@ -80,7 +79,6 @@ public class AdminController {
         food = new Food(foodId, name, detail, file, price, discount, 0,
                 categoryService.getCategoryById(categoryId));
         foodService.updateFood(food);
-        System.out.println(food.toString() + "********************************");
         return "redirect:/dashboard";
 
     }
@@ -183,4 +181,14 @@ public class AdminController {
         model.put("foods", orderService.getOrderById(orderId).getFoods());
         return "viewOrder";
     }
+
+
+    @GetMapping("/deleteAllOrdersForUser/{userId}")
+    public String deleteAllOrderForUser(@PathVariable int userId) {
+        User user = userService.getUserById(userId);
+        user.setOrders(null);
+        userService.updateUser(user);
+        return "redirect:/sales";
+    }
+    /*Moaaz Is The Best Now And Forever*/
 }

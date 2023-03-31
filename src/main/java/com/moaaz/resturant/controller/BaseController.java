@@ -27,6 +27,7 @@ public class BaseController {
 
     @PostMapping("/login")
     public String login(ModelMap model, @RequestParam String email, @RequestParam String password, HttpSession session) {
+        System.out.println("Before Login Method.....********************");
         int x = loginService.login(email, password);
         System.out.println(x + "******************************************************************************PersonId");
         if (x == -1) {

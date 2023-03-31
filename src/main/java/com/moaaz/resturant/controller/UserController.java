@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -24,7 +23,6 @@ public class UserController {
     private FoodService foodService;
     @Autowired
     private OrderService orderService;
-
     @Autowired
     private ReservationService reservationService;
     @Autowired
@@ -46,11 +44,8 @@ public class UserController {
     @PostMapping("/register")
     public String signup(@ModelAttribute("user") User user) {
         user.setRole("USER");
-        user = userService.addUser(user);
-        /* Create Cart For User*/
-        Cart cart = new Cart(0, null, user);
-        cartService.addCart(cart);
-
+        user.setCart(new Cart());
+        userService.addUser(user);
         /*Send Message To Email To Make Him Now He Is In Our DB Now*/
         mailSenderService.sendMessage("Welcome In Our Klassy Restaurant... ", user.getEmail());
         return "redirect:/login";
@@ -73,7 +68,7 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("indexFromCart")
+    @GetMapping("/indexFromCart")
     public String indexFromCart(HttpSession session) {
         session.setAttribute("number", 0);
         return "redirect:/index";
@@ -84,9 +79,7 @@ public class UserController {
         if (!new SessionSecurity().userSecurity(session))
             return "redirect:/login";
         Food food = foodService.getFoodById(foodId);
-        if (session.getAttribute("userId") != null) System.out.println("Moaaz Is The Best Forever...");
         int userId = (int) session.getAttribute("userId");
-        System.out.println(userId + "*****************************************************************************UserId");
         User user = userService.getUserById(userId);
         /*Create Cart If Null And Add Food To It If Not Null*/
         user.addFoodToCart(food);
@@ -98,7 +91,7 @@ public class UserController {
         return "redirect:/myCart2";
     }
 
-    @GetMapping("myCart")
+    @GetMapping("/myCart")
     public String myCart(ModelMap model, HttpSession session) {
         int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
@@ -107,7 +100,7 @@ public class UserController {
 
     }
 
-    @GetMapping("myCart2")
+    @GetMapping("/myCart2")
     public String myCart2(ModelMap model, HttpSession session) {
         if (!new SessionSecurity().userSecurity(session))
             return "redirect:/login";
@@ -123,7 +116,7 @@ public class UserController {
 
     }
 
-    @GetMapping("deleteFoodFromCart/{foodId}")
+    @GetMapping("/deleteFoodFromCart/{foodId}")
     public String deleteFoodFromCart(@PathVariable int foodId, HttpSession session) {
         int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
@@ -136,19 +129,12 @@ public class UserController {
     @GetMapping("/buyNow/{userId}")
     public String buyNow(@PathVariable int userId) {
         User user = userService.getUserById(userId);
-
-        /*Add Order For User Then Save It*/
-        List<Food> orderFoods = orderService.getFoods(user.getCart().getFoods());// deep copy
-        Cart cart = new Cart();
-        cart.setFoods(orderFoods);
-        Order order = new Order(0, orderFoods, String.valueOf(LocalDate.now()), true, cartService.getTotalMoneyForThisCart(cart));
-        orderService.addOrder(order);
-        List<Order> orders = user.getOrders();
-        orders.add(order);
-        user.setOrders(orders);
-        userService.updateUser(user);
+        Order order = new Order(0, user.getCart().getFoods(), String.valueOf(LocalDate.now()), true,
+                cartService.getTotalMoneyForThisCart(user.getCart()));
+        user.addOrder(order);
         cartService.restartCart(user.getCart());
-
+        userService.updateUser(user);
+        mailSenderService.sendMessage("Thank You For Your Order From Our Klassy Restaurant....", user.getEmail());
         return "redirect:/myCart2";
 
     }

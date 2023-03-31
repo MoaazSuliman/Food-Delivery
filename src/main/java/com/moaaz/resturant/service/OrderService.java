@@ -75,4 +75,8 @@ public class OrderService {
         }
         return total;
     }
+
+    public void deleteListOfOrders(List<Order> orders) {
+        orderRepository.deleteAll(orders);
+    }
 }

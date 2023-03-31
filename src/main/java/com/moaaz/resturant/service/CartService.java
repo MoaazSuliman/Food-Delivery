@@ -31,21 +31,21 @@ public class CartService {
     }
 
     public double getTotalMoneyForThisCart(Cart cart) {
-        double totalAfter = 0;
+        double totalMoney = 0;
         List<Food> foods = cart.getFoods();
         for (int i = 0; i < foods.size(); i++) {
-            totalAfter += foods.get(i).getTotal();
+            totalMoney += foods.get(i).getTotal();
         }
-        return totalAfter;
+        return totalMoney;
     }
 
     public double getTotalMoneyForThisCartBeforeDiscount(Cart cart) {
-        double totalBeforeDiscount = 0;
+        double totalMoneyBeforeDiscount = 0;
         List<Food> foods = cart.getFoods();
         for (int i = 0; i < foods.size(); i++) {
-            totalBeforeDiscount += foods.get(i).getPrice();
+            totalMoneyBeforeDiscount += foods.get(i).getPrice();
         }
-        return totalBeforeDiscount;
+        return totalMoneyBeforeDiscount;
     }
 
     public Cart deleteFoodFromCart(int foodId, Cart cart) {

@@ -13,7 +13,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
     @Autowired
     private UserRepository userRepository;
 
@@ -26,7 +26,6 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-//        return personRepository.findAllByRole("USER");
         return userRepository.findAll();
     }
 
